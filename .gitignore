@@ -1,0 +1,6 @@
+.DS_Store
+.idea
+.idea/dataSources.xml
+.idea/DjangoProject.iml
+.idea/misc.xml
+.idea/workspace.xml
