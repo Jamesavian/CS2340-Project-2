@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Your Incomes</h2>
+  <ul>
+    {% for income in incomes %}
+      <li>{{ income.date }} - {{ income.source }}: ${{ income.amount }}</li>
+    {% empty %}
+      <li>No incomes recorded yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
