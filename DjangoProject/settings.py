@@ -129,3 +129,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     BASE_DIR /'DjangoProject/static/',
 ]
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_PORT = 587
+EMAIL_USE_TLS = True
+#EMAIL_HOST_USER = # INSERT EMAIL OF USER HERE
+#EMAIL_HOST_PASSWORD = # INSERT PASSWORD OF USER HERE
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
