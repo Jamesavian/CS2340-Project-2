@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.forms.utils import ErrorList
 from django.utils.safestring import mark_safe
 from django import forms
+
 class CustomErrorList(ErrorList):
     def __str__(self):
         if not self:

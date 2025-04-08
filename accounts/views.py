@@ -1,13 +1,9 @@
 from django.shortcuts import render
-from django.contrib.auth import login as auth_login, authenticate
-
-
-# Create your views here.
-
-
-
+from django.contrib.auth import login as auth_login, authenticate, logout as auth_logout
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+
+# Create your views here.
 @login_required
 def logout(request):
     auth_logout(request)
