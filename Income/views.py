@@ -23,5 +23,14 @@ def add_income(request):
 
 @login_required
 def income_list(request):
-    income = Income.objects.filter(user=request.user).order_by('-date')
-    return render(request, 'Income/income_list.html', {'income': income})
+    if request.method == 'POST':
+        form = IncomeForm(request.POST)
+        if form.is_valid():
+            income = form.save(commit=False)
+            income.user = request.user  # link to current user
+            income.save()
+            return redirect('income_list')  # or whatever page you want to go to
+    else:
+        form = IncomeForm()
+    incomes = Income.objects.filter(user=request.user).order_by('-date')
+    return render(request, 'Income/income_list.html', {'incomes': incomes, 'form': form})

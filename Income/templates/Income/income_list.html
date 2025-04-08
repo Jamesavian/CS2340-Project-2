@@ -9,4 +9,13 @@
       <li>No incomes recorded yet.</li>
     {% endfor %}
   </ul>
+
+       <hr>
+
+  <h2>Add New Income</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Income</button>
+  </form>
 {% endblock %}
