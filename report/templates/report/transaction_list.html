@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Your Transactions</h2>
+  <ul>
+    {% for transaction in transactions %}
+      <li>{{ transaction.date }} - {{ transaction.source }}: ${{ transaction.amount }}</li>
+    {% empty %}
+      <li>No transactions recorded yet.</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Add New Income</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ income_form.as_p }}
+    <button type="submit" name="income_submit">Add Income</button>
+  </form>
+
+  <h2>Add New Expense</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ expense_form.as_p }}
+    <button type="submit" name="expense_submit">Add Expense</button>
+  </form>
+{% endblock %}

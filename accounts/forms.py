@@ -9,6 +9,7 @@ class CustomErrorList(ErrorList):
             return ''
         return mark_safe(''.join([
             f'<div class="alert alert-danger" role="alert">{e}</div>' for e in self]))
+
 class CustomUserCreationForm(UserCreationForm):
 
     email = forms.EmailField(
@@ -18,8 +19,7 @@ class CustomUserCreationForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
-        for fieldname in ['username', 'password1',
-        'password2', 'email']:
+        for fieldname in ['username', 'password1', 'password2', 'email']:
             self.fields[fieldname].help_text = None
             self.fields[fieldname].widget.attrs.update(
                 {'class': 'form-control'}

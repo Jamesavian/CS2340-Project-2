@@ -41,8 +41,7 @@ INSTALLED_APPS = [
     'MoneyParce',
     'home',
     'accounts',
-    'Expense',
-    'Income'
+    'report'
 
 ]
 
