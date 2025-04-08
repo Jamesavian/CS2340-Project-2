@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Your Transactions</h2>
+  <ul>
+    {% for transaction in transactions %}
+      <li>{{ transaction.date }} - {{ transaction.source }}: ${{ transaction.amount }}</li>
+    {% empty %}
+      <li>No transactions recorded yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

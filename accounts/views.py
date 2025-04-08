@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import login as auth_login, authenticate, logout as auth_logout
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from .forms import CustomUserCreationForm, CustomErrorList
 
 # Create your views here.
 @login_required
@@ -29,7 +30,6 @@ def login(request):
             auth_login(request, user)
             return redirect('home.index')
 
-from .forms import CustomUserCreationForm, CustomErrorList
 def signup(request):
     template_data = {}
     template_data['title'] = 'Sign Up'
