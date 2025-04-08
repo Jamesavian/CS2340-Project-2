@@ -2,6 +2,14 @@
 
 {% block content %}
   <h2>Your Transactions</h2>
+    <label for="cars">Choose a month:</label>
+    <label for="date"></label><select name="date" id="date">
+    {% for date in date_list %}
+       <option value=date>{{ date }}</option>
+    {% endfor %}
+    </select>
+    <input type="submit" value="Submit">
+
   <ul>
     {% for transaction in transactions %}
         {%  if transaction.type == 'Income' %}
