@@ -22,6 +22,6 @@ def add_income(request):
 
 
 @login_required
-def expense_list(request):
+def income_list(request):
     Income = Income.objects.filter(user=request.user).order_by('-date')
     return render(request, 'Income_list.html', {'income': income})

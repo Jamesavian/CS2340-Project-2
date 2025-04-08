@@ -4,19 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d08da0ec-b701-44a2-9a8e-f58055864566" name="Changes" comment="Implemented Sign up user Story">
-      <change afterPath="$PROJECT_DIR$/Expense/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Expense/templates/add_expense.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Expense/templates/expenses_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Expense/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Income/form.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Income/templates/add_income.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Income/templates/income_list.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Income/urls.py" afterDir="false" />
+    <list default="true" id="d08da0ec-b701-44a2-9a8e-f58055864566" name="Changes" comment="Added Models for Income and expense">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoProject/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoProject/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoProject/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoProject/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoProject/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoProject/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Expense/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Expense/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Income/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Income/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Income/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Income/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +127,7 @@
       <workItem from="1744028320712" duration="4545000" />
       <workItem from="1744032920989" duration="1513000" />
       <workItem from="1744054183794" duration="3219000" />
-      <workItem from="1744064406062" duration="5106000" />
+      <workItem from="1744064406062" duration="6039000" />
     </task>
     <task id="LOCAL-00001" summary="Implemented Sign up user Story">
       <option name="closed" value="true" />
@@ -145,7 +137,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744057280450</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added Models for Income and expense">
+      <option name="closed" value="true" />
+      <created>1744069788187</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1744069788187</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,6 +153,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Implemented Sign up user Story" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented Sign up user Story" />
+    <MESSAGE value="Added Models for Income and expense" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Models for Income and expense" />
   </component>
 </project>
