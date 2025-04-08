@@ -16,14 +16,14 @@ def transaction_list(request):
                 income = income_form.save(commit=False)
                 income.user = request.user
                 income.save()
-                return redirect('transaction_list')
+                return redirect('report.transaction_list')
         elif 'expense_submit' in request.POST:
             expense_form = ExpenseForm(request.POST)
             if expense_form.is_valid():
                 expense = expense_form.save(commit=False)
                 expense.user = request.user
                 expense.save()
-                return redirect('transaction_list')
+                return redirect('report.transaction_list')
 
     transactions = Transaction.objects.filter(user=request.user).order_by('-date')
     return render(request, 'report/transaction_list.html', {'transactions': transactions,
@@ -37,7 +37,7 @@ def add_transaction(request, formType, templateName):
             transaction = form.save(commit=False)
             transaction.user = request.user  # link to current user
             transaction.save()
-            return redirect('transaction_list')  # or whatever page you want to go to
+            return redirect('report.transaction_list')  # or whatever page you want to go to
     elif request.method == 'GET':
         form = formType()
     return render(request, templateName, {'form': form})
