@@ -1,5 +1,4 @@
-from django.shortcuts import render, redirect
-
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Transaction, Income, Expense
 from .forms import ReportForm, IncomeForm, ExpenseForm
@@ -45,6 +44,12 @@ def add_transaction(request, formType, templateName):
     elif request.method == 'GET':
         form = formType()
     return render(request, templateName, {'form': form})
+
+@login_required
+def delete_transaction(request, id):
+    transaction = get_object_or_404(Transaction, id=id, user=request.user)
+    transaction.delete()
+    return redirect('report.transaction_list')
 
 @login_required
 def add_income(request):

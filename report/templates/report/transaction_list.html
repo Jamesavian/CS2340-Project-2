@@ -6,8 +6,16 @@
     {% for transaction in transactions %}
         {%  if transaction.type == 'Income' %}
             <li>{{ transaction.date }} - Source: {{ transaction.source }} - Income: ${{ transaction.amount }}</li>
+            <a class="btn btn-danger"
+              href="{% url 'transactions.delete_transaction'
+              id=transaction.id %}">X
+            </a>
         {% else %}
             <li>{{ transaction.date }} - Source: {{ transaction.source }} - Expense: ${{ transaction.amount }}</li>
+            <a class="btn btn-danger"
+              href="{% url 'transactions.delete_transaction'
+              id=transaction.id %}">X
+            </a>
         {% endif %}
     {% empty %}
       <li>No transactions recorded yet.</li>
