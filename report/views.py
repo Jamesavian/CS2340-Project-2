@@ -36,8 +36,10 @@ def add_transaction(request, formType, templateName):
             transaction = form.save(commit=False)
             if formType == IncomeForm:
                 transaction.type = 'Income'
+                transaction.save()
             else:
                 transaction.type = 'Expense'
+                transaction.save()
             transaction.user = request.user  # link to current user
             transaction.save()
             return redirect('report.transaction_list')  # or whatever page you want to go to

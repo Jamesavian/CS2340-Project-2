@@ -132,10 +132,12 @@ STATICFILES_DIRS = [
     BASE_DIR /'DjangoProject/static/',
 ]
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_PORT = 587
 EMAIL_USE_TLS = True
-#EMAIL_HOST_USER = # INSERT EMAIL OF USER HERE
-#EMAIL_HOST_PASSWORD = # INSERT PASSWORD OF USER HERE
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST_USER = 'gtcs034@gmail.com'
+EMAIL_HOST_PASSWORD = 'Testing213'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
