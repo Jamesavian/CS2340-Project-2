@@ -29,7 +29,9 @@ def transaction_list(request):
     transactions = Transaction.objects.filter(user=request.user).order_by('-date')
 
     # Find starting month and year, and ending month and year. Then create a dropdown iterating from every month between them
-    date_list = dateRange(transactions)
+    date_list = []
+    if transactions:
+        date_list = date_list.append(dateRange(transactions))
 
     return render(request, 'report/transaction_list.html', {'transactions': transactions,
                                         'income_form': income_form, 'expense_form': expense_form, 'date_list': date_list})
