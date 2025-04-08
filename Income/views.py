@@ -18,10 +18,10 @@ def add_income(request):
             return redirect('income_list')  # or whatever page you want to go to
     elif request.method == 'GET':
         form = IncomeForm()
-    return render(request, 'add_income.html', {'form': form})
+    return render(request, 'Income/add_income.html', {'form': form})
 
 
 @login_required
-def expense_list(request):
-    Income = Income.objects.filter(user=request.user).order_by('-date')
-    return render(request, 'Income_list.html', {'income': income})
+def income_list(request):
+    income = Income.objects.filter(user=request.user).order_by('-date')
+    return render(request, 'Income/income_list.html', {'income': income})

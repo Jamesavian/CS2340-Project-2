@@ -17,10 +17,10 @@ def add_expense(request):
             return redirect('expense_list')  # or whatever page you want to go to
     elif request.method == 'GET':
         form = ExpenseForm()
-    return render(request, 'add_expense.html', {'form': form})
+    return render(request, 'Expense/add_expense.html', {'form': form})
 
 
 @login_required
 def expense_list(request):
     expenses = Expense.objects.filter(user=request.user).order_by('-date')
-    return render(request, 'expense_list.html', {'expenses': expenses})
+    return render(request, 'Expense/expense_list.html', {'expenses': expenses})
