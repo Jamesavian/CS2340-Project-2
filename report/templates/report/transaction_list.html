@@ -4,7 +4,11 @@
   <h2>Your Transactions</h2>
   <ul>
     {% for transaction in transactions %}
-      <li>{{ transaction.date }} - {{ transaction.source }}: ${{ transaction.amount }}</li>
+        {%  if transaction.type == 'Income' %}
+            <li>{{ transaction.date }} - Source: {{ transaction.source }} - Income: ${{ transaction.amount }}</li>
+        {% else %}
+            <li>{{ transaction.date }} - Source: {{ transaction.source }} - Expense: ${{ transaction.amount }}</li>
+        {% endif %}
     {% empty %}
       <li>No transactions recorded yet.</li>
     {% endfor %}
