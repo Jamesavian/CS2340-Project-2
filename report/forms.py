@@ -7,7 +7,11 @@ class ReportForm(forms.ModelForm):
         fields = ['source', 'amount', 'date']
 
 class IncomeForm(ReportForm):
-    model = Income
+    class Meta:
+        model = Income
+        fields = ['source', 'amount', 'date']
 
 class ExpenseForm(ReportForm):
-    model = Expense
+    class Meta:
+        model = Expense
+        fields = ['source', 'amount', 'date', 'category']

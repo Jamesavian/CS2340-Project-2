@@ -1,44 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Your Transactions</h2>
-    <label for="cars">Choose a month:</label>
-    <label for="date"></label><select name="date" id="date">
-    {% for date in date_list %}
-       <option value=date>{{ date }}</option>
-    {% endfor %}
-    </select>
-    <input type="submit" value="Submit">
 
-  <ul>
-    {% for transaction in transactions %}
-        {%  if transaction.type == 'Income' %}
-            <li>{{ transaction.date }} - Source: {{ transaction.source }} - Income: ${{ transaction.amount }}</li>
-            <a class="btn btn-danger"
-              href="{% url 'report.delete_transaction' id=transaction.id%}">X
-            </a>
-        {% else %}
-            <li>{{ transaction.date }} - Source: {{ transaction.source }} - Expense: ${{ transaction.amount }}</li>
-            <a class="btn btn-danger"
-              href="{% url 'report.delete_transaction' id=transaction.id %}">X
-            </a>
-        {% endif %}
-    {% empty %}
-      <li>No transactions recorded yet.</li>
-    {% endfor %}
-  </ul>
+<h2>Your Transactions</h2>
 
-  <h2>Add New Income</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ income_form.as_p }}
-    <button type="submit" name="income_submit">Add Income</button>
-  </form>
+<label for="cars">Choose a month:</label>
+<label for="date"></label>
+<select name="date" id="date">
+  {% for date in date_list %}
+    <option value=date>{{ date }}</option>
+  {% endfor %}
+</select>
+<input type="submit" value="Submit">
 
-  <h2>Add New Expense</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ expense_form.as_p }}
-    <button type="submit" name="expense_submit">Add Expense</button>
-  </form>
+<ul>
+  {% for transaction in transactions %}
+    {% if transaction.type == 'Income' %}
+      <li>{{ transaction.date }} - Source: {{ transaction.source }} - Income: ${{ transaction.amount }}</li>
+      <a class="btn btn-danger" href="{% url 'report.delete_transaction' id=transaction.id %}">X</a>
+    {% else %}
+      <li>{{ transaction.date }} - Source: {{ transaction.source }} - Expense ({{ transaction.expense.category.name }}): ${{ transaction.amount }}</li>
+      <a class="btn btn-danger" href="{% url 'report.delete_transaction' id=transaction.id %}">X</a>
+    {% endif %}
+  {% empty %}
+    <li>No transactions recorded yet.</li>
+  {% endfor %}
+</ul>
+
+<h2>Add New Income</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ income_form.as_p }}
+  <button type="submit" name="income_submit">Add Income</button>
+</form>
+
+<h2>Add New Expense</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ expense_form.as_p }}
+  <button type="submit" name="expense_submit">Add Expense</button>
+</form>
+
 {% endblock %}

@@ -2,11 +2,19 @@ from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime
 import calendar
 from django.contrib.auth.decorators import login_required
-from .models import Transaction, Income, Expense
+from .models import Transaction, Income, Expense, Category
 from .forms import ReportForm, IncomeForm, ExpenseForm
+
+DEFAULT_CATEGORIES = ["Food", "Transport", "Entertainment", "Utilities", "Other"]
+
+def ensure_default_categories():
+    for name in DEFAULT_CATEGORIES:
+        Category.objects.get_or_create(name=name)
 
 @login_required
 def transaction_list(request):
+    ensure_default_categories()
+
     income_form = IncomeForm()
     expense_form = ExpenseForm()
 
@@ -27,34 +35,36 @@ def transaction_list(request):
                 return redirect('report.transaction_list')
 
     transactions = Transaction.objects.filter(user=request.user).order_by('-date')
-
-    # Find starting month and year, and ending month and year. Then create a dropdown iterating from every month between them
     date_list = []
-    if transactions:
-        date_list = date_list.append(dateRange(transactions))
 
-    return render(request, 'report/transaction_list.html', {'transactions': transactions,
-                                        'income_form': income_form, 'expense_form': expense_form, 'date_list': date_list})
+    if transactions:
+        date_list = dateRange(transactions)
+
+    return render(request, 'report/transaction_list.html', {
+        'transactions': transactions,
+        'income_form': income_form,
+        'expense_form': expense_form,
+        'date_list': date_list
+    })
 
 def dateRange(transactions):
-    # [April 2024, May 2024]
     start_month = transactions[0].date.month
     start_year = transactions[0].date.year
     end_month = transactions.last().date.month
     end_year = transactions.last().date.year
 
     month_list = list(calendar.month_name)
-
     date_list = []
     current_month = start_month
     current_year = start_year
-    while current_month <= end_month and current_year <= end_year:
+
+    while current_year < end_year or (current_year == end_year and current_month <= end_month):
         date_list.append(month_list[current_month] + " " + str(current_year))
         if current_month == 12:
             current_month = 1
-            current_year = current_year + 1
+            current_year += 1
         else:
-            current_month = current_month + 1
+            current_month += 1
 
     return date_list
 
@@ -64,16 +74,11 @@ def add_transaction(request, formType, templateName):
         form = formType(request.POST)
         if form.is_valid():
             transaction = form.save(commit=False)
-            if formType == IncomeForm:
-                transaction.type = 'Income'
-                transaction.save()
-            else:
-                transaction.type = 'Expense'
-                transaction.save()
-            transaction.user = request.user  # link to current user
+            transaction.user = request.user
+            transaction.type = 'Income' if formType == IncomeForm else 'Expense'
             transaction.save()
-            return redirect('report.transaction_list')  # or whatever page you want to go to
-    elif request.method == 'GET':
+            return redirect('report.transaction_list')
+    else:
         form = formType()
     return render(request, templateName, {'form': form})
 
