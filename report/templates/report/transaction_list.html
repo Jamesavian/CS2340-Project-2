@@ -1,44 +1,54 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
 
 {% block content %}
+  <h2>Your Transactions</h2>
+  <ul>
+    {% for transaction in transactions %}
+      <li>{{ transaction.date }} - {{ transaction.source }} ({{ transaction.category }}): ${{ transaction.amount }}</li>
+    {% empty %}
+      <li>No transactions recorded yet.</li>
+    {% endfor %}
+  </ul>
 
-<h2>Your Transactions</h2>
+  <h2>Add New Income</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ income_form.source.label_tag }} {{ income_form.source }}
+    {{ income_form.amount.label_tag }} {{ income_form.amount }}
+    {{ income_form.date.label_tag }} {{ income_form.date }}
+    {{ income_form.category.label_tag }} {{ income_form.category }}
+    <button type="submit" name="income_submit">Add Income</button>
+  </form>
 
-<label for="cars">Choose a month:</label>
-<label for="date"></label>
-<select name="date" id="date">
-  {% for date in date_list %}
-    <option value=date>{{ date }}</option>
-  {% endfor %}
-</select>
-<input type="submit" value="Submit">
+  <h2>Add New Expense</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ expense_form.source.label_tag }} {{ expense_form.source }}
+    {{ expense_form.amount.label_tag }} {{ expense_form.amount }}
+    {{ expense_form.date.label_tag }} {{ expense_form.date }}
+    {{ expense_form.category.label_tag }} {{ expense_form.category }}
+    <button type="submit" name="expense_submit">Add Expense</button>
+  </form>
 
-<ul>
-  {% for transaction in transactions %}
-    {% if transaction.type == 'Income' %}
-      <li>{{ transaction.date }} - Source: {{ transaction.source }} - Income: ${{ transaction.amount }}</li>
-      <a class="btn btn-danger" href="{% url 'report.delete_transaction' id=transaction.id %}">X</a>
-    {% else %}
-      <li>{{ transaction.date }} - Source: {{ transaction.source }} - Expense ({{ transaction.expense.category.name }}): ${{ transaction.amount }}</li>
-      <a class="btn btn-danger" href="{% url 'report.delete_transaction' id=transaction.id %}">X</a>
-    {% endif %}
-  {% empty %}
-    <li>No transactions recorded yet.</li>
-  {% endfor %}
-</ul>
+  <hr>
+  <h2>Budgets</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ budget_form.category.label_tag }} {{ budget_form.category }}
+    {{ budget_form.amount.label_tag }} {{ budget_form.amount }}
+    <button type="submit" name="budget_submit">Set Budget</button>
+  </form>
 
-<h2>Add New Income</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ income_form.as_p }}
-  <button type="submit" name="income_submit">Add Income</button>
-</form>
-
-<h2>Add New Expense</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ expense_form.as_p }}
-  <button type="submit" name="expense_submit">Add Expense</button>
-</form>
-
+  <ul>
+    {% for budget in budgets %}
+      <li>
+        {{ budget.category }}: Budget = ${{ budget.amount }} |
+        Spent = ${{ category_totals|get_item:budget.category|default:0 }}
+      </li>
+    {% empty %}
+      <li>No budgets set yet.</li>
+    {% endfor %}
+  </ul>
 {% endblock %}
